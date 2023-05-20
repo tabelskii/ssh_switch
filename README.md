@@ -36,3 +36,11 @@ optional arguments:
   --**create**    creates profile based on current system id\_rsa and id\_rsa.pub and switches to it  
   --**current**   prints current profile  
   --**list**      prints list of profiles
+
+
+### installation
+
+```shell
+chmod +x ssh-switch.py
+sudo cp ssh-switch.py /usr/local/bin/ssh-switch
+```
