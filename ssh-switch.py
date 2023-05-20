@@ -2,6 +2,9 @@
 
 import argparse
 import os
+import glob
+import itertools
+
 import shutil
 
 
@@ -29,7 +32,26 @@ def get_args():
         action="store_true",
     )
 
+    parser.add_argument(
+        "--list",
+        help="prints list of profiles",
+        action="store_true",
+    )
+
     return parser.parse_args()
+
+
+def get_profiles():
+    files = glob.glob(os.path.join(SSH_PATH, "*"))
+    current_profile = get_current_profile()
+    current_profile_path = os.path.join(SSH_PATH, current_profile)
+    profiles = (
+        os.path.split(file)[-1]
+        for file in files
+        if os.path.isdir(file) and file != current_profile_path
+    )
+    profiles = itertools.chain([f"*{current_profile}"], profiles)
+    print("\n".join(profiles))
 
 
 def get_current_profile():
@@ -92,6 +114,8 @@ def main():
         create(args.profile)
     elif args.current:
         print(get_current_profile())
+    elif args.list:
+        get_profiles()
     else:
         switch(args.profile)
 
