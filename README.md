@@ -41,6 +41,6 @@ optional arguments:
 ### installation
 
 ```shell
-chmod +x ssh-switch.py
 sudo cp ssh-switch.py /usr/local/bin/ssh-switch
+sudo chmod uog=rx /usr/local/bin/ssh-switch
 ```
